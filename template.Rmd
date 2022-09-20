@@ -1,0 +1,74 @@
+---
+title: "Simple document"
+output: word_document
+  
+  
+---
+```{r}
+library(tidyverse)
+```
+
+
+I'm an R Markdown document! 
+
+# Section 1
+
+Here's a **code chunk** that samples from 
+a _normal distribution_:
+
+```{r}
+samp = rnorm(100)
+length(samp)
+```
+
+# Section 2
+
+I can take the mean of the sample, too!
+The mean is `r mean(samp)`
+round(mean(samp),2)
+
+#section 3
+This is going to make a plot. First load the dataframe, then use ggplot to make a scatterplot
+
+```{r chunk_scatterplot}
+
+
+example_df =
+  tibble (
+    var_numeric = 5:8,
+    var_char = c("my", "name", "is", "rhea"),
+    var_logic = c(TRUE, TRUE, FALSE, TRUE),
+    var_factor= factor(c("male", "female", "male", "male"))
+  )
+
+plot_df =
+  tibble(
+    x= rnorm(n=1000),
+    y=1+2*x+rnorm(n=1000)
+  )
+  
+
+
+ggplot (plot_df, aes(x=x, y=y))+geom_point()
+
+ggsave ("scatter_plot.pdf", height=4, width=6)
+```
+
+#Section 4
+ 
+
+```{r chunk_assessment}
+la_df=
+    tibble(
+    norm = rnorm(n=500, mean=1),
+    logical =norm  >0,
+    abs_norm=abs(norm)
+  
+  )
+
+ggplot(la_df, aes(x= abs_norm))+geom_histogram()
+  
+  
+
+```
+
